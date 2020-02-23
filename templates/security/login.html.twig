@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  
+    <title>Login</title>
+  
+    <!-- Custom fonts for this template-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  
+    <!-- Custom styles for this template-->
+    <link href="http://localhost:81/css/sb-admin-2.css" rel="stylesheet" type="text/css">
+  
+  </head>
+
+
+    <style>
+    body {
+        margin:0;
+        padding:0;
+        background:url("http://localhost:81/img/become.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    </style>
+
+{% block body %}
+
+<section class="row h-100">
+    <div class="col-sm-12 my-auto">
+        <div class="col-md-6 col-sm-8 mx-auto">
+            <div class="card border-none">
+                <div class="card-body">
+                    <div class="mt-2 text-center">
+                        <h2>Connexion</h2>
+                    </div>
+                    <form method="post">
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+
+                        <h1 class="h3 mb-3 font-weight-normal">Veuillez vous connecter</h1>
+                        <label for="inputEmail" class="sr-only">Adresse email</label>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                        <p> </p>
+                        <label for="inputPassword" class="sr-only">Mot de passe</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                        <p> </p>
+                        <input type="hidden" name="_csrf_token"
+                            value="{{ csrf_token('authenticate') }}"
+                        >
+                        <button class="btn btn-lg btn-primary" type="submit">
+                            Se connecter
+                        </button>
+                    </form>
+                    <p> </p>
+                    <a href="register" class="btn btn-lg btn-primary">ou Créer un compte</a>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-sm-12 mt-5 footer">
+                <p class="text-gray small text-center">
+                    &copy; 2019
+                </p>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="http://localhost:81/js/jquery.min.js"></script>
+  <script src="http://localhost:81/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="http://localhost:81/js/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="http://localhost:81/js/sb-admin-2.min.js"></script>
+{% endblock %}

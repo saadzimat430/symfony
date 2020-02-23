@@ -1,0 +1,57 @@
+security:
+    encoders:
+        App\Entity\User: 
+            algorithm: bcrypt
+
+    providers:
+        users:
+            entity:
+                class: App\Entity\User
+                property: email
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: ~
+            pattern: ^/
+            provider: users
+
+
+            # activate different ways to authenticate
+
+            http_basic: ~
+            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+
+            form_login:
+                check_path: login
+                login_path: login
+                username_parameter: "email"
+                password_parameter: "password"
+            #   csrf_token_generator: security.csrf.token_manager
+                default_target_path: /
+            #   always_use_default_target_path: false
+            #   use_referer: true
+            #   failure_path: 
+
+            logout:
+                path: /logout
+                target: /
+                success_handler: ~
+                invalidate_session: true
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+                
+
+            # form_login: true
+            # https://symfony.com/doc/current/security/form_login_setup.html
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/dashboard, roles: ROLE_ADMIN }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
